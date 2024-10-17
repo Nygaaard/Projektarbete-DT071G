@@ -22,5 +22,17 @@
       "Posts": [],
       "Friends": []
     }
+  },
+  {
+    "Firstname": "Carolina",
+    "Lastname": "Andersson",
+    "Email": "carro@su.se",
+    "Birthday": "1992-06-16",
+    "Username": "Busan",
+    "Password": "pass",
+    "Account": {
+      "Posts": [],
+      "Friends": []
+    }
   }
 ]

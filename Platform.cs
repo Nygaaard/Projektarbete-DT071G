@@ -16,7 +16,54 @@ class Platform
     }
     public void Login()
     {
+        Console.Clear();
+        System.Console.WriteLine("=== Login ===");
+        System.Console.WriteLine();
+        System.Console.WriteLine("Follow the instructions below to login.");
+        System.Console.WriteLine();
+        System.Console.WriteLine("Type 'back' to go back...");
 
+        string? username;
+        do
+        {
+            System.Console.Write("Username: ");
+            username = Console.ReadLine();
+            if(username == "back")
+            {
+                Console.Clear();
+                return;
+            }
+        }while(String.IsNullOrEmpty(username));
+
+        string? password;
+        do
+        {
+            System.Console.Write("Password: ");
+            password = Console.ReadLine();
+            if(password == "back")
+            {
+                Console.Clear();
+                return;
+            }
+        }while(String.IsNullOrEmpty(password));
+
+        Member? matchedMember = null;
+
+        foreach(var m in members)
+        {
+            if(username != m.Username && password != m.Password)
+            {
+                System.Console.WriteLine("Member not found...");
+            } else
+            {
+                matchedMember = m;
+            } 
+        }
+        if(matchedMember != null)
+        {
+            MyPage myPage = new MyPage();
+            myPage.MyPageMenu(matchedMember);
+        }
     }
     public void Register()
     {
