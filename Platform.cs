@@ -27,7 +27,7 @@ class Platform
         string? firstname;
         do
         {
-            System.Console.Write("Firstname");
+            System.Console.Write("Firstname: ");
             firstname = Console.ReadLine();
 
             if (firstname?.ToLower() == "back")
@@ -40,7 +40,7 @@ class Platform
         string? lastname;
         do
         {
-            System.Console.Write("Lastname");
+            System.Console.Write("Lastname: ");
             lastname = Console.ReadLine();
 
             if (lastname?.ToLower() == "back")
@@ -148,17 +148,43 @@ class Platform
         Member newMember = new Member(firstname, lastname, email!, birthday, username, firstPassword!, newAccount);
         members.Add(newMember);
 
+        System.Console.WriteLine();
         System.Console.WriteLine("Registration successful!");
 
         new Services().PressKeyAndContinue();
     }
     public void ViewAllMembers()
     {
-        
+        Console.Clear();
+        System.Console.WriteLine("=== All members ===");
+        System.Console.WriteLine();
+
+        if(members.Count < 1)
+        {
+            System.Console.WriteLine("List of members is empty...");
+        } else
+        {
+            foreach(var m in members)
+            {
+                System.Console.WriteLine("---");
+                System.Console.WriteLine($"{m.Username.ToUpper()}");
+                System.Console.WriteLine($"{m.Firstname} {m.Lastname}");
+                System.Console.WriteLine($"Amount of posts: {m.Account.GetPosts().Count}");
+                System.Console.WriteLine($"Amount of friends; {m.Account.GetFriends().Count}");
+                System.Console.WriteLine("----");
+            }
+        }
+        new Services().PressKeyAndContinue();
     }
     public void AboutUs()
     {
+        Console.Clear();
+        System.Console.WriteLine("=== About us ===");
+        System.Console.WriteLine();
+        System.Console.WriteLine("Information about us...");
+        System.Console.WriteLine();
 
+        new Services().PressKeyAndContinue();
     }
     public List<Member> GetAllMembers()
     {
