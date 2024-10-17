@@ -1,0 +1,15 @@
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\bin\Debug\net8.0\Projektarbete-DT071G.exe
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\bin\Debug\net8.0\Projektarbete-DT071G.deps.json
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\bin\Debug\net8.0\Projektarbete-DT071G.runtimeconfig.json
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\bin\Debug\net8.0\Projektarbete-DT071G.dll
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\bin\Debug\net8.0\Projektarbete-DT071G.pdb
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\obj\Debug\net8.0\Projektarbete-DT071G.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\obj\Debug\net8.0\Projektarbete-DT071G.AssemblyInfoInputs.cache
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\obj\Debug\net8.0\Projektarbete-DT071G.AssemblyInfo.cs
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\obj\Debug\net8.0\Projektarbete-DT071G.csproj.CoreCompileInputs.cache
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\obj\Debug\net8.0\Projektarbete-DT071G.sourcelink.json
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\obj\Debug\net8.0\Projektarbete-DT071G.dll
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\obj\Debug\net8.0\refint\Projektarbete-DT071G.dll
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\obj\Debug\net8.0\Projektarbete-DT071G.pdb
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\obj\Debug\net8.0\Projektarbete-DT071G.genruntimeconfig.cache
+C:\Users\46700\Desktop\C#\Projekt\Projektarbete-DT071G\obj\Debug\net8.0\ref\Projektarbete-DT071G.dll

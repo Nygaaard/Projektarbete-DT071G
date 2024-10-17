@@ -2,6 +2,7 @@
 {
     static void Main()
     {
+        Platform platform = new Platform(new List<Member>());
         bool isRunning = true;
 
         while (isRunning)
@@ -23,16 +24,16 @@
             switch (userInput)
             {
                 case "1":
-                    //Login();
+                    platform.Login();
                     break;
                 case "2":
-                    //Register();
+                    platform.Register();
                     break;
                 case "3":
-                    //ViewAllMembers()
+                    platform.ViewAllMembers();
                     break;
                 case "4":
-                    //AboutUs();
+                    platform.AboutUs();
                     break;
                 case "0":
                     isRunning = false;
@@ -42,6 +43,7 @@
                 default:
                     Console.Clear();
                     System.Console.WriteLine("Invalid input...");
+                    System.Console.WriteLine();
                     break;
             }
         }

@@ -1,21 +1,21 @@
 class Account
 {
     private List<Post> posts;
-    private List<Member> members;
+    private List<Member> friends;
     public Account(List<Post> p, List<Member> m)
     {
         posts = p;
-        members = m;
+        friends = m;
     }
     public List<Post> Posts
     {
         get => posts;
         set => posts = value;
     }
-    public List<Member> Members
+    public List<Member> Friends
     {
-        get => members;
-        set => members = value;
+        get => friends;
+        set => friends = value;
     }
     public void AddPost(Post post)
     {
@@ -35,8 +35,8 @@ class Account
     {
         return posts;
     }
-    public List<Member> GetMembers()
+    public List<Member> GetFriends()
     {
-        return members;
+        return friends;
     }
 }

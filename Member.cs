@@ -61,7 +61,7 @@ class Member
             }
             else
             {
-                throw new ArgumentException("Invalid date format. Please use YYYY-MM-DD.");
+                throw new ArgumentException("Invalid date format. Please use yyyy-mm-dd.");
             }
         }
     }

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Projektarbete-DT071G/1.0.0": {
+        "runtime": {
+          "Projektarbete-DT071G.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Projektarbete-DT071G/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
