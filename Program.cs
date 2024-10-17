@@ -5,6 +5,8 @@
         Platform platform = new Platform(new List<Member>());
         bool isRunning = true;
 
+        platform.LoadMembers();
+
         while (isRunning)
         {
             System.Console.WriteLine("---- Welcome to ----");
@@ -39,6 +41,7 @@
                     isRunning = false;
                     Console.Clear();
                     System.Console.WriteLine("Exit program...");
+                    platform.SaveMembers();
                     break;
                 default:
                     Console.Clear();

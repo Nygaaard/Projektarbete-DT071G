@@ -1,0 +1,26 @@
+[
+  {
+    "Firstname": "Andreas",
+    "Lastname": "Nygard",
+    "Email": "anny2301@student.miun.se",
+    "Birthday": "1992-04-15",
+    "Username": "Anny",
+    "Password": "pass",
+    "Account": {
+      "Posts": [],
+      "Friends": []
+    }
+  },
+  {
+    "Firstname": "Andreas",
+    "Lastname": "Nygard",
+    "Email": "anny2301@student.miun.se",
+    "Birthday": "1992-04-15",
+    "Username": "Anny2301",
+    "Password": "pass",
+    "Account": {
+      "Posts": [],
+      "Friends": []
+    }
+  }
+]

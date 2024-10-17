@@ -2,6 +2,11 @@ class Account
 {
     private List<Post> posts;
     private List<Member> friends;
+    public Account()
+    {
+        posts = new List<Post>();
+        friends = new List<Member>();
+    }
     public Account(List<Post> p, List<Member> m)
     {
         posts = p;
@@ -23,10 +28,11 @@ class Account
     }
     public void DeletePost(int index)
     {
-        if(index < 0 || index >= posts.Count)
+        if (index < 0 || index >= posts.Count)
         {
             throw new ArgumentOutOfRangeException(nameof(index), "Index not found...");
-        } else
+        }
+        else
         {
             posts.RemoveAt(index);
         }

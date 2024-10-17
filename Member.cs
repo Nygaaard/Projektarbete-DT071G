@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using System.Text.Json.Serialization;
 class Member
 {
     private string? firstname;
@@ -7,16 +8,17 @@ class Member
     private DateOnly birthday;
     private string? username;
     private string? password;
-    private Account account;
+    private Account? account;
+    public Member() {}
     public Member(string first, string last, string e, DateOnly bd, string user, string pass, Account acc)
     {
-        firstname = first;
-        lastname = last;
+        Firstname = first;
+        Lastname = last;
         Email = e;
         Birthday = bd;
-        username = user;
-        password = pass;
-        account = acc;
+        Username = user;
+        Password = pass;
+        Account = acc;
     }
     public string Firstname
     {
@@ -77,7 +79,7 @@ class Member
     }
     public Account Account
     {
-        get => account;
+        get => account!;
         set => account = value;
     }
 }

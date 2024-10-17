@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 class Platform
 {
     private List<Member> members;
@@ -189,5 +191,27 @@ class Platform
     public List<Member> GetAllMembers()
     {
         return members;
+    }
+    public void SaveMembers()
+    {
+        string filePath = "users.json";
+        string jsonData = JsonSerializer.Serialize(members, new JsonSerializerOptions
+        {
+            WriteIndented = true
+        });
+        File.WriteAllText(filePath, jsonData);
+    }
+    public void LoadMembers()
+    {
+        string filePath = "users.json";
+
+        if(File.Exists(filePath))
+        {
+            string jsonData = File.ReadAllText(filePath);
+            members = JsonSerializer.Deserialize<List<Member>>(jsonData) ?? new List<Member>();
+        } else 
+        {
+            members = new List<Member>();
+        }
     }
 }
