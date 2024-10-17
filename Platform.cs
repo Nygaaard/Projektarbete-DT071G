@@ -3,9 +3,11 @@ using System.Text.Json.Serialization;
 class Platform
 {
     private List<Member> members;
+    private Services services;
     public Platform(List<Member> m)
     {
         members = m;
+        services = new Services();
     }
     public List<Member> Members
     {
@@ -192,26 +194,12 @@ class Platform
     {
         return members;
     }
-    public void SaveMembers()
-    {
-        string filePath = "users.json";
-        string jsonData = JsonSerializer.Serialize(members, new JsonSerializerOptions
-        {
-            WriteIndented = true
-        });
-        File.WriteAllText(filePath, jsonData);
-    }
     public void LoadMembers()
     {
-        string filePath = "users.json";
-
-        if(File.Exists(filePath))
-        {
-            string jsonData = File.ReadAllText(filePath);
-            members = JsonSerializer.Deserialize<List<Member>>(jsonData) ?? new List<Member>();
-        } else 
-        {
-            members = new List<Member>();
-        }
+        members = services.LoadMembers();
+    }
+    public void SaveMembers()
+    {
+        services.SaveMembers(members);
     }
 }
