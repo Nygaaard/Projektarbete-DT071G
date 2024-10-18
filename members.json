@@ -1,0 +1,46 @@
+[
+  {
+    "Firstname": "Andreas",
+    "Lastname": "Nygard",
+    "Email": "anny2301@student.miun.se",
+    "Birthday": "1992-04-15",
+    "Username": "AndNyg",
+    "Password": "pass",
+    "Account": {
+      "Posts": [
+        {
+          "Message": "Test1"
+        },
+        {
+          "Message": "Test3"
+        }
+      ],
+      "Friends": [
+        {
+          "Firstname": "Carolina ",
+          "Lastname": "Andersson",
+          "Email": "caan@su.se",
+          "Birthday": "1992-06-16",
+          "Username": "Busan",
+          "Password": "pass",
+          "Account": {
+            "Posts": [],
+            "Friends": []
+          }
+        }
+      ]
+    }
+  },
+  {
+    "Firstname": "Carolina ",
+    "Lastname": "Andersson",
+    "Email": "caan@su.se",
+    "Birthday": "1992-06-16",
+    "Username": "Busan",
+    "Password": "pass",
+    "Account": {
+      "Posts": [],
+      "Friends": []
+    }
+  }
+]

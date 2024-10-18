@@ -4,6 +4,11 @@ class Platform
 {
     private List<Member> members;
     private Services services;
+    public Platform()
+    {
+        services = new Services();
+        members = services.LoadMembers();
+    }
     public Platform(List<Member> m)
     {
         members = m;
@@ -28,43 +33,48 @@ class Platform
         {
             System.Console.Write("Username: ");
             username = Console.ReadLine();
-            if(username == "back")
+            if (username == "back")
             {
                 Console.Clear();
                 return;
             }
-        }while(String.IsNullOrEmpty(username));
+        } while (String.IsNullOrEmpty(username));
 
         string? password;
         do
         {
             System.Console.Write("Password: ");
             password = Console.ReadLine();
-            if(password == "back")
+            if (password == "back")
             {
                 Console.Clear();
                 return;
             }
-        }while(String.IsNullOrEmpty(password));
+        } while (String.IsNullOrEmpty(password));
 
         Member? matchedMember = null;
 
-        foreach(var m in members)
+        foreach (var m in members)
         {
-            if(username != m.Username && password != m.Password)
-            {
-                System.Console.WriteLine("Member not found...");
-            } else
+            if (username == m.Username && password == m.Password)
             {
                 matchedMember = m;
-            } 
+                break; 
+            }
         }
-        if(matchedMember != null)
+
+        if (matchedMember != null)
         {
             MyPage myPage = new MyPage();
             myPage.MyPageMenu(matchedMember);
         }
+        else
+        {
+            System.Console.WriteLine("Incorrect username or password.");
+            new Services().PressKeyAndContinue();
+        }
     }
+
     public void Register()
     {
         Console.Clear();
@@ -210,12 +220,13 @@ class Platform
         System.Console.WriteLine("=== All members ===");
         System.Console.WriteLine();
 
-        if(members.Count < 1)
+        if (members.Count < 1)
         {
             System.Console.WriteLine("List of members is empty...");
-        } else
+        }
+        else
         {
-            foreach(var m in members)
+            foreach (var m in members)
             {
                 System.Console.WriteLine("---");
                 System.Console.WriteLine($"{m.Username.ToUpper()}");
@@ -239,6 +250,10 @@ class Platform
     }
     public List<Member> GetAllMembers()
     {
+        if (members == null)
+        {
+            members = services.LoadMembers(); // Ladda medlemmar om de inte är laddade
+        }
         return members;
     }
     public void LoadMembers()

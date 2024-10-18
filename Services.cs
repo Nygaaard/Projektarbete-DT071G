@@ -13,7 +13,7 @@ class Services
 
     public void SaveMembers(List<Member> members)
     {
-        string filePath = "users.json";
+        string filePath = "members.json";
         string jsonData = JsonSerializer.Serialize(members, new JsonSerializerOptions
         {
             WriteIndented = true
@@ -23,7 +23,7 @@ class Services
 
     public List<Member> LoadMembers()
     {
-        string filePath = "users.json";
+        string filePath = "members.json";
         List<Member> members;
 
         if (File.Exists(filePath))

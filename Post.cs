@@ -1,6 +1,8 @@
+
 class Post
 {
     private string? message;
+    public Post() {}
     public Post(string m)
     {
         Message = m;
