@@ -180,7 +180,7 @@ class Platform
         while (true)
         {
             System.Console.Write("Password: ");
-            firstPassword = Console.ReadLine();
+            firstPassword = services.ReadPassword();
             if (firstPassword?.ToLower() == "back")
             {
                 Console.Clear();
@@ -188,7 +188,7 @@ class Platform
             }
 
             System.Console.Write("Enter password again: ");
-            secondPassword = Console.ReadLine();
+            secondPassword = services.ReadPassword();
             if (secondPassword?.ToLower() == "back")
             {
                 Console.Clear();

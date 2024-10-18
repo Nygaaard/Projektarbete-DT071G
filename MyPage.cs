@@ -145,7 +145,6 @@ class MyPage
         if (posts.Count < 1)
         {
             System.Console.WriteLine("You have no current posts...");
-            return;
         }
         else
         {
