@@ -50,7 +50,7 @@ class MyPage
                     SearchFriends(matchedMember);
                     break;
                 case "5":
-                    //MyFriends();
+                    MyFriends(matchedMember);
                     break;
                 case "6":
                     //AccountInformation();
@@ -163,7 +163,6 @@ class MyPage
     {
         Platform platform = new Platform();
 
-        // Kontrollera om medlemmarna har laddats
         List<Member> members = platform.GetAllMembers();
 
         if (members == null || members.Count == 0)
@@ -178,7 +177,6 @@ class MyPage
         System.Console.WriteLine("=== Search and follow friends ===");
         System.Console.WriteLine();
 
-        // Filtrera bort den inloggade användaren från listan
         List<Member> filteredMembers = members.Where(m => m.Username != matchedMember.Username).ToList();
 
         if (filteredMembers.Count == 0)
@@ -188,7 +186,6 @@ class MyPage
             return;
         }
 
-        // Visa alla andra användare
         int index = 0;
         foreach (var member in filteredMembers)
         {
@@ -206,20 +203,21 @@ class MyPage
             {
                 Member selectedMember = filteredMembers[selectedIndex];
 
-                // Kontrollera om den valda användaren redan är en vän
                 if (matchedMember.Account.GetFriends().Any(f => f.Username == selectedMember.Username))
                 {
+                    System.Console.WriteLine();
                     System.Console.WriteLine("You are already following this user.");
                 }
                 else
                 {
-                    // Lägg till den valda användaren till vänlista
                     matchedMember.Account.GetFriends().Add(selectedMember);
+                    System.Console.WriteLine();
                     System.Console.WriteLine($"{selectedMember.Username} has been added to your friends list!");
                 }
             }
             else
             {
+                System.Console.WriteLine();
                 System.Console.WriteLine("Invalid index.");
             }
         }
@@ -230,6 +228,91 @@ class MyPage
 
         new Services().PressKeyAndContinue();
     }
+    public void MyFriends(Member matchedMember)
+    {
+        bool stayInFriendsMenu = true; 
 
+        while (stayInFriendsMenu)
+        {
+            Console.Clear();
+            System.Console.WriteLine("=== My friends ===");
+            System.Console.WriteLine();
+            System.Console.WriteLine("Here is a list of all your friends:");
+            System.Console.WriteLine();
 
+            List<Member> friends = matchedMember.Account.GetFriends();
+
+            if (friends.Count == 0)
+            {
+                System.Console.WriteLine("You don't have any friends yet.");
+                new Services().PressKeyAndContinue();
+                return;
+            }
+
+            int i = 0;
+            foreach (var friend in friends)
+            {
+                System.Console.WriteLine($"[{i}] - {friend.Username}");
+                i++;
+            }
+
+            System.Console.WriteLine();
+            System.Console.WriteLine("Enter the index of the friend you want to view");
+            System.Console.WriteLine();
+            System.Console.WriteLine("Type 'back' to go back");
+            System.Console.WriteLine();
+
+            string? input = Console.ReadLine();
+
+            if (input?.ToLower() == "back")
+            {
+                stayInFriendsMenu = false; 
+            }
+            else if (!string.IsNullOrEmpty(input) && int.TryParse(input, out int selectedIndex))
+            {
+                if (selectedIndex >= 0 && selectedIndex < friends.Count)
+                {
+                    Member selectedFriend = friends[selectedIndex];
+
+                    Console.Clear();
+                    System.Console.WriteLine("=== Friend's Information ===");
+                    System.Console.WriteLine();
+                    System.Console.WriteLine($"Username: {selectedFriend.Username}");
+                    System.Console.WriteLine($"Firstname: {selectedFriend.Firstname}");
+                    System.Console.WriteLine($"Lastname: {selectedFriend.Lastname}");
+                    System.Console.WriteLine($"Email: {selectedFriend.Email}");
+                    System.Console.WriteLine($"Birthday: {selectedFriend.Birthday}");
+                    System.Console.WriteLine();
+                    System.Console.WriteLine($"Number of posts: {selectedFriend.Account.GetPosts().Count}");
+
+                    List<Member> friendsFriends = selectedFriend.Account.GetFriends();
+                    if (friendsFriends.Count < 1)
+                    {
+                        System.Console.WriteLine("This member has no friends on here...");
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Friends: ");
+                        foreach (var f in friendsFriends)
+                        {
+                            System.Console.WriteLine($" - {f.Username}");
+                        }
+                    }
+
+                    System.Console.WriteLine();
+                    new Services().PressKeyAndContinue(); 
+                }
+                else
+                {
+                    System.Console.WriteLine("Invalid index. Please try again.");
+                    new Services().PressKeyAndContinue();
+                }
+            }
+            else
+            {
+                System.Console.WriteLine("Invalid input. Please enter a valid index.");
+                new Services().PressKeyAndContinue();
+            }
+        }
+    }
 }

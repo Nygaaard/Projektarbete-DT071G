@@ -27,6 +27,7 @@ class Platform
         System.Console.WriteLine("Follow the instructions below to login.");
         System.Console.WriteLine();
         System.Console.WriteLine("Type 'back' to go back...");
+        System.Console.WriteLine();
 
         string? username;
         do
@@ -229,10 +230,10 @@ class Platform
             foreach (var m in members)
             {
                 System.Console.WriteLine("---");
-                System.Console.WriteLine($"{m.Username.ToUpper()}");
-                System.Console.WriteLine($"{m.Firstname} {m.Lastname}");
-                System.Console.WriteLine($"Amount of posts: {m.Account.GetPosts().Count}");
-                System.Console.WriteLine($"Amount of friends; {m.Account.GetFriends().Count}");
+                System.Console.WriteLine($"      {m.Username.ToUpper()}");
+                System.Console.WriteLine($"- {m.Firstname} {m.Lastname}");
+                System.Console.WriteLine($"- Amount of posts: {m.Account.GetPosts().Count}");
+                System.Console.WriteLine($"- Amount of friends; {m.Account.GetFriends().Count}");
                 System.Console.WriteLine("----");
             }
         }
