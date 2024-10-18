@@ -53,7 +53,7 @@ class MyPage
                     MyFriends(matchedMember);
                     break;
                 case "6":
-                    //AccountInformation();
+                    AccountInformation(matchedMember);
                     break;
                 case "0":
                     isRunning = false;
@@ -230,7 +230,7 @@ class MyPage
     }
     public void MyFriends(Member matchedMember)
     {
-        bool stayInFriendsMenu = true; 
+        bool stayInFriendsMenu = true;
 
         while (stayInFriendsMenu)
         {
@@ -266,7 +266,7 @@ class MyPage
 
             if (input?.ToLower() == "back")
             {
-                stayInFriendsMenu = false; 
+                stayInFriendsMenu = false;
             }
             else if (!string.IsNullOrEmpty(input) && int.TryParse(input, out int selectedIndex))
             {
@@ -300,7 +300,7 @@ class MyPage
                     }
 
                     System.Console.WriteLine();
-                    new Services().PressKeyAndContinue(); 
+                    new Services().PressKeyAndContinue();
                 }
                 else
                 {
@@ -314,5 +314,35 @@ class MyPage
                 new Services().PressKeyAndContinue();
             }
         }
+    }
+    public void AccountInformation(Member matchedMember)
+    {
+        Console.Clear();
+        System.Console.WriteLine("=== Account information ===");
+        System.Console.WriteLine();
+
+        System.Console.WriteLine($"Username: {matchedMember.Username}");
+        System.Console.WriteLine($"Firstname: {matchedMember.Firstname}");
+        System.Console.WriteLine($"Lastname: {matchedMember.Lastname}");
+        System.Console.WriteLine($"Email: {matchedMember.Email}");
+        System.Console.WriteLine($"Birthday: {matchedMember.Birthday}");
+
+        System.Console.WriteLine($"Amount of posts: {matchedMember.Account.GetPosts().Count}");
+        List<Member> friendsFriends = matchedMember.Account.GetFriends();
+        if (friendsFriends.Count < 1)
+        {
+            System.Console.WriteLine();
+            System.Console.WriteLine("You have no friends on here...");
+        }
+        else
+        {
+            System.Console.WriteLine("Friends: ");
+            foreach (var f in friendsFriends)
+            {
+                System.Console.WriteLine($" - {f.Username}");
+            }
+        }
+
+        new Services().PressKeyAndContinue();
     }
 }
