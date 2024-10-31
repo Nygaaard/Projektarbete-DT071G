@@ -41,7 +41,7 @@
                     isRunning = false;
                     Console.Clear();
                     System.Console.WriteLine("Exit program...");
-                    platform.SaveMembers();
+                    // platform.SaveMembers();
                     break;
                 default:
                     Console.Clear();

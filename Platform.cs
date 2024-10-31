@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 class Platform
@@ -212,6 +213,8 @@ class Platform
 
         System.Console.WriteLine();
         System.Console.WriteLine("Registration successful!");
+        
+        services.SaveMembers(members);
 
         new Services().PressKeyAndContinue();
     }
@@ -245,6 +248,11 @@ class Platform
         System.Console.WriteLine("=== About us ===");
         System.Console.WriteLine();
         System.Console.WriteLine("Information about us...");
+        System.Console.WriteLine();
+        System.Console.WriteLine("Detta är projektarbetet i kurs DT071G. Projektet har skapats av Andreas Nygård.");
+        System.Console.WriteLine("Det är en gästbok där användaren har möjlighet att registrera sig och logga in till sin sida.");
+        System.Console.WriteLine("Väl där kan man lägga till, ta bort och visa alla inlägg.");
+        System.Console.WriteLine("Man har även möjlighet att söka efter andra användare och börja följa dessa.");
         System.Console.WriteLine();
 
         new Services().PressKeyAndContinue();

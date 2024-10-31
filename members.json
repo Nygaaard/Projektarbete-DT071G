@@ -14,5 +14,17 @@
       ],
       "Friends": []
     }
+  },
+  {
+    "Firstname": "Marcus",
+    "Lastname": "Nygard",
+    "Email": "nygard@hptmail\u0000.cpm",
+    "Birthday": "1992-04-15",
+    "Username": "mackan",
+    "Password": "pass",
+    "Account": {
+      "Posts": [],
+      "Friends": []
+    }
   }
 ]
