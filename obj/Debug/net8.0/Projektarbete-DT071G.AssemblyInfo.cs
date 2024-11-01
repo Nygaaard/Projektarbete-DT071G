@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Projektarbete-DT071G")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+01670edb674b122d87b08c799a3b960c77e4b81d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f3f6f72a92675112e2121bd0bd49440865aa037")]
 [assembly: System.Reflection.AssemblyProductAttribute("Projektarbete-DT071G")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Projektarbete-DT071G")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

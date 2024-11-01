@@ -1,10 +1,17 @@
+
+/*
+Class representing the platform
+Written by Andreas Nygård
+*/
 using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 class Platform
 {
+    //Fields
     private List<Member> members;
     private Services services;
+    //Constructors
     public Platform()
     {
         services = new Services();
@@ -15,67 +22,76 @@ class Platform
         members = m;
         services = new Services();
     }
+    //Get and set
     public List<Member> Members
     {
         get => members;
         set => members = value;
     }
-    public void Login()
+    //Method for logging in
+    public void Login() 
+{
+    // Skapa en instans av Services-klassen
+    Services services = new Services();
+
+    // Tydliggör konsolen och ge instruktioner
+    Console.Clear();
+    System.Console.WriteLine("=== Login ===");
+    System.Console.WriteLine();
+    System.Console.WriteLine("Follow the instructions below to login.");
+    System.Console.WriteLine();
+    System.Console.WriteLine("Type 'back' to go back...");
+    System.Console.WriteLine();
+    
+    // Fråga efter användarnamn
+    string? username;
+    do
     {
-        Console.Clear();
-        System.Console.WriteLine("=== Login ===");
-        System.Console.WriteLine();
-        System.Console.WriteLine("Follow the instructions below to login.");
-        System.Console.WriteLine();
-        System.Console.WriteLine("Type 'back' to go back...");
-        System.Console.WriteLine();
-
-        string? username;
-        do
+        System.Console.Write("Username: ");
+        username = Console.ReadLine();
+        if (username == "back")
         {
-            System.Console.Write("Username: ");
-            username = Console.ReadLine();
-            if (username == "back")
-            {
-                Console.Clear();
-                return;
-            }
-        } while (String.IsNullOrEmpty(username));
-
-        string? password;
-        do
-        {
-            System.Console.Write("Password: ");
-            password = Console.ReadLine();
-            if (password == "back")
-            {
-                Console.Clear();
-                return;
-            }
-        } while (String.IsNullOrEmpty(password));
-
-        Member? matchedMember = null;
-
-        foreach (var m in members)
-        {
-            if (username == m.Username && password == m.Password)
-            {
-                matchedMember = m;
-                break; 
-            }
+            Console.Clear();
+            return;
         }
+    } while (String.IsNullOrEmpty(username));
 
-        if (matchedMember != null)
+    // Fråga efter lösenord
+    string? password;
+    do
+    {
+        System.Console.Write("Password: ");
+        password = services.ReadPassword(); // Använd Services.ReadPassword()
+        if (password == "back")
         {
-            MyPage myPage = new MyPage();
-            myPage.MyPageMenu(matchedMember);
+            Console.Clear();
+            return;
         }
-        else
+    } while (String.IsNullOrEmpty(password));
+
+    // Matcha användarnamn och lösenord med en medlem
+    Member? matchedMember = null;
+    foreach (var m in members)
+    {
+        if (username == m.Username && password == m.Password)
         {
-            System.Console.WriteLine("Incorrect username or password.");
-            new Services().PressKeyAndContinue();
+            matchedMember = m;
+            break;
         }
     }
+
+    // Validera och navigera till användarens sida
+    if (matchedMember != null)
+    {
+        MyPage myPage = new MyPage();
+        myPage.MyPageMenu(matchedMember);
+    }
+    else
+    {
+        System.Console.WriteLine("Incorrect username or password.");
+        new Services().PressKeyAndContinue();
+    }
+}
 
     public void Register()
     {

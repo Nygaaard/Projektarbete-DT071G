@@ -1,22 +1,19 @@
+/*
+Class representing users page
+Written by Andreas Nygård
+*/
 class MyPage
 {
-    // private Account? account;
-    // public MyPage(){}
-    // public MyPage(Account acc)
-    // {
-    //     account = acc;
-    // }
-    // public Account Account
-    // {
-    //     get => account!;
-    //     set => account = value;
-    // }
+    //Method for users my page menu
+    //Matched member from login method in platform class
     public void MyPageMenu(Member matchedMember)
     {
         bool isRunning = true;
 
+        //While loop for dynamic user exeperience 
         while (isRunning)
         {
+            //Menu options 
             Console.Clear();
             System.Console.WriteLine("=== My page ===");
             System.Console.WriteLine();
@@ -35,6 +32,7 @@ class MyPage
             System.Console.Write("Write here: ");
             string? userInput = Console.ReadLine();
 
+            //Different options depending on user input
             switch (userInput)
             {
                 case "1":
@@ -55,11 +53,13 @@ class MyPage
                 case "6":
                     AccountInformation(matchedMember);
                     break;
+                //If 0 while loop ends - ending program
                 case "0":
                     isRunning = false;
                     Console.Clear();
                     System.Console.WriteLine("Go back...");
                     break;
+                //If input is anything but above options
                 default:
                     Console.Clear();
                     System.Console.WriteLine("Invalid input...");
@@ -68,10 +68,13 @@ class MyPage
             }
         }
     }
-    public void AddPost(Member matchedMember)
+    //Method for adding a post
+    public void AddPost(Member matchedMember) //Using logged in user
     {
+        //First - get all posts from account class
         List<Post> posts = matchedMember.Account.GetPosts();
         Console.Clear();
+        //Create menu options
         System.Console.WriteLine("=== Add a post ===");
         System.Console.WriteLine();
         System.Console.WriteLine("Write your message below.");
@@ -79,7 +82,7 @@ class MyPage
 
         System.Console.Write("Message: ");
         string? message = Console.ReadLine();
-
+        //Validate message
         if (String.IsNullOrEmpty(message))
         {
             System.Console.WriteLine("Write something...");
@@ -87,6 +90,7 @@ class MyPage
         }
         else
         {
+            //If valid - create new post and call add method 
             Post newPost = new Post(message);
             posts.Add(newPost);
         }
@@ -94,10 +98,13 @@ class MyPage
         System.Console.WriteLine("Post added successfully!");
         new Services().PressKeyAndContinue();
     }
-    public void DeletePost(Member matchedMember)
+    //Method for deleting posts
+    public void DeletePost(Member matchedMember) // Using logged in user 
     {
+        //Get all posts from that specific user
         List<Post> posts = matchedMember.Account.GetPosts();
 
+        //Create menu options
         Console.Clear();
         System.Console.WriteLine("=== Delete a post ===");
         System.Console.WriteLine();
@@ -109,6 +116,8 @@ class MyPage
 
         int i = 0;
 
+        //Read all posts
+        //Add index in front of message
         foreach (var post in posts)
         {
             System.Console.WriteLine($"[{i}] - {post.Message}");
@@ -117,10 +126,13 @@ class MyPage
 
         string? userInput = Console.ReadLine();
 
+        //Validate user input 
+        //Make sure input is a valid number
         if (!String.IsNullOrEmpty(userInput) && int.TryParse(userInput, out int indexNumber))
         {
             if (indexNumber >= 0 || indexNumber < posts.Count)
             {
+                //If valid - remove post on given index
                 System.Console.WriteLine("Post deleted...");
                 posts.RemoveAt(indexNumber);
             }
@@ -133,21 +145,26 @@ class MyPage
 
         new Services().PressKeyAndContinue();
     }
+    //Method for reading posts
     public void ReadAllPosts(Member matchedMember)
     {
         Console.Clear();
         System.Console.WriteLine("=== All your posts ===");
         System.Console.WriteLine();
 
+        //Get posts from that user
         List<Post> posts = matchedMember.Account.GetPosts();
         int i = 0;
 
+        //Check if posts > 0
         if (posts.Count < 1)
         {
             System.Console.WriteLine("You have no current posts...");
         }
         else
         {
+            //Write all posts
+            //Add index number on front
             foreach (var post in posts)
             {
                 System.Console.WriteLine($"[{i}] - {post.Message}");
@@ -158,15 +175,19 @@ class MyPage
 
         new Services().PressKeyAndContinue();
     }
-    public void SearchFriends(Member matchedMember)
+    //Method for searching other users on platform 
+    public void SearchFriends(Member matchedMember) // Logged in as matched user
     {
+        //Create object of platform class
         Platform platform = new Platform();
-
+        //Get all members on the platform
         List<Member> members = platform.GetAllMembers();
 
+        //Check if members list is empty
         if (members == null || members.Count == 0)
         {
             Console.Clear();
+            //Return if empty
             System.Console.WriteLine("No members found. Please make sure the platform has members loaded.");
             new Services().PressKeyAndContinue();
             return;
@@ -176,8 +197,10 @@ class MyPage
         System.Console.WriteLine("=== Search and follow friends ===");
         System.Console.WriteLine();
 
+        //Filter out the current user from members list
         List<Member> filteredMembers = members.Where(m => m.Username != matchedMember.Username).ToList();
 
+        //Check if there are any other members to follow
         if (filteredMembers.Count == 0)
         {
             System.Console.WriteLine("There are no other members to follow.");
@@ -185,6 +208,7 @@ class MyPage
             return;
         }
 
+        //Display list of other members
         int index = 0;
         foreach (var member in filteredMembers)
         {
@@ -196,12 +220,15 @@ class MyPage
         System.Console.Write("Enter the index of the user you want to follow: ");
         string? input = Console.ReadLine();
 
+        //Validate user input 
         if (!string.IsNullOrEmpty(input) && int.TryParse(input, out int selectedIndex))
-        {
+        {   
+            //Check if selected index is valid 
             if (selectedIndex >= 0 && selectedIndex < filteredMembers.Count)
             {
                 Member selectedMember = filteredMembers[selectedIndex];
 
+                //Check if current user is already following selected member
                 if (matchedMember.Account.GetFriends().Any(f => f.Username == selectedMember.Username))
                 {
                     System.Console.WriteLine();
@@ -209,6 +236,7 @@ class MyPage
                 }
                 else
                 {
+                    //Add selected member to current users friends list 
                     matchedMember.Account.GetFriends().Add(selectedMember);
                     System.Console.WriteLine();
                     System.Console.WriteLine($"{selectedMember.Username} has been added to your friends list!");
@@ -227,10 +255,11 @@ class MyPage
 
         new Services().PressKeyAndContinue();
     }
+    //Method for displaying logged in users friends
     public void MyFriends(Member matchedMember)
     {
         bool stayInFriendsMenu = true;
-
+        //While loop for dynamic user experience
         while (stayInFriendsMenu)
         {
             Console.Clear();
@@ -239,8 +268,10 @@ class MyPage
             System.Console.WriteLine("Here is a list of all your friends:");
             System.Console.WriteLine();
 
+            //Get users friends
             List<Member> friends = matchedMember.Account.GetFriends();
 
+            //Check if friends list is empty
             if (friends.Count == 0)
             {
                 System.Console.WriteLine("You don't have any friends yet.");
@@ -249,12 +280,13 @@ class MyPage
             }
 
             int i = 0;
+            //Display friends from friends list
             foreach (var friend in friends)
             {
                 System.Console.WriteLine($"[{i}] - {friend.Username}");
                 i++;
             }
-
+            //Option to enter index of friend
             System.Console.WriteLine();
             System.Console.WriteLine("Enter the index of the friend you want to view");
             System.Console.WriteLine();
@@ -263,16 +295,20 @@ class MyPage
 
             string? input = Console.ReadLine();
 
+            //If input = "back" - break while loop
             if (input?.ToLower() == "back")
             {
                 stayInFriendsMenu = false;
             }
             else if (!string.IsNullOrEmpty(input) && int.TryParse(input, out int selectedIndex))
             {
+                //If user input is within range of friends index
                 if (selectedIndex >= 0 && selectedIndex < friends.Count)
-                {
+                {   
+                    
                     Member selectedFriend = friends[selectedIndex];
-
+                    
+                    //Get and display friends information from registration
                     Console.Clear();
                     System.Console.WriteLine("=== Friend's Information ===");
                     System.Console.WriteLine();
@@ -283,7 +319,9 @@ class MyPage
                     System.Console.WriteLine($"Birthday: {selectedFriend.Birthday}");
                     System.Console.WriteLine();
                     System.Console.WriteLine($"Number of posts: {selectedFriend.Account.GetPosts().Count}");
-
+                    
+                    //Check if user has any friends on platform
+                    //Get users friends 
                     List<Member> friendsFriends = selectedFriend.Account.GetFriends();
                     if (friendsFriends.Count < 1)
                     {
@@ -291,6 +329,7 @@ class MyPage
                     }
                     else
                     {
+                        //Display friends if list is not empty
                         System.Console.WriteLine("Friends: ");
                         foreach (var f in friendsFriends)
                         {
@@ -314,6 +353,7 @@ class MyPage
             }
         }
     }
+    //Method for displaying account information for logged in user
     public void AccountInformation(Member matchedMember)
     {
         Console.Clear();
@@ -326,7 +366,9 @@ class MyPage
         System.Console.WriteLine($"Email: {matchedMember.Email}");
         System.Console.WriteLine($"Birthday: {matchedMember.Birthday}");
 
+        //Using Count method to display amount of posts
         System.Console.WriteLine($"Amount of posts: {matchedMember.Account.GetPosts().Count}");
+        //Display friends if list is not empty
         List<Member> friendsFriends = matchedMember.Account.GetFriends();
         if (friendsFriends.Count < 1)
         {
