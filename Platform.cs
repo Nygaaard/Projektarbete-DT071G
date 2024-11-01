@@ -29,72 +29,74 @@ class Platform
         set => members = value;
     }
     //Method for logging in
-    public void Login() 
-{
-    // Skapa en instans av Services-klassen
-    Services services = new Services();
-
-    // Tydliggör konsolen och ge instruktioner
-    Console.Clear();
-    System.Console.WriteLine("=== Login ===");
-    System.Console.WriteLine();
-    System.Console.WriteLine("Follow the instructions below to login.");
-    System.Console.WriteLine();
-    System.Console.WriteLine("Type 'back' to go back...");
-    System.Console.WriteLine();
-    
-    // Fråga efter användarnamn
-    string? username;
-    do
+    public void Login()
     {
-        System.Console.Write("Username: ");
-        username = Console.ReadLine();
-        if (username == "back")
+        // Create instance of Services class
+        Services services = new Services();
+
+        // Clear console and give instructions
+        Console.Clear();
+        System.Console.WriteLine("=== Login ===");
+        System.Console.WriteLine();
+        System.Console.WriteLine("Follow the instructions below to login.");
+        System.Console.WriteLine();
+        System.Console.WriteLine("Type 'back' to go back...");
+        System.Console.WriteLine();
+
+        // Ask for username
+        string? username;
+        do
         {
-            Console.Clear();
-            return;
+            System.Console.Write("Username: ");
+            username = Console.ReadLine();
+            if (username == "back")
+            {
+                Console.Clear();
+                return;
+            }
+        } while (String.IsNullOrEmpty(username));
+
+        // Ask for password
+        string? password;
+        do
+        {
+            System.Console.Write("Password: ");
+            password = services.ReadPassword(); // Use ReadPassword from Services class
+            if (password == "back")
+            {
+                Console.Clear();
+                return;
+            }
+        } while (String.IsNullOrEmpty(password));
+
+        // Match username with password
+        //If match - create matched member
+        Member? matchedMember = null;
+        foreach (var m in members)
+        {
+            if (username == m.Username && password == m.Password)
+            {
+                matchedMember = m;
+                break;
+            }
         }
-    } while (String.IsNullOrEmpty(username));
 
-    // Fråga efter lösenord
-    string? password;
-    do
-    {
-        System.Console.Write("Password: ");
-        password = services.ReadPassword(); // Använd Services.ReadPassword()
-        if (password == "back")
+        // Validate and navigate to users page
+        if (matchedMember != null)
         {
-            Console.Clear();
-            return;
+            MyPage myPage = new MyPage();
+            myPage.MyPageMenu(matchedMember);
         }
-    } while (String.IsNullOrEmpty(password));
-
-    // Matcha användarnamn och lösenord med en medlem
-    Member? matchedMember = null;
-    foreach (var m in members)
-    {
-        if (username == m.Username && password == m.Password)
+        else
         {
-            matchedMember = m;
-            break;
+            System.Console.WriteLine("Incorrect username or password.");
+            new Services().PressKeyAndContinue();
         }
     }
-
-    // Validera och navigera till användarens sida
-    if (matchedMember != null)
-    {
-        MyPage myPage = new MyPage();
-        myPage.MyPageMenu(matchedMember);
-    }
-    else
-    {
-        System.Console.WriteLine("Incorrect username or password.");
-        new Services().PressKeyAndContinue();
-    }
-}
-
+    //Method for registration
     public void Register()
     {
+        //Clear console and give instructions
         Console.Clear();
         System.Console.WriteLine("=== Login ===");
         System.Console.WriteLine();
@@ -103,12 +105,13 @@ class Platform
         System.Console.WriteLine("Write 'back' to go back");
         System.Console.WriteLine();
 
+        //Ask for firstname
         string? firstname;
         do
         {
             System.Console.Write("Firstname: ");
             firstname = Console.ReadLine();
-
+            //Give option to go back
             if (firstname?.ToLower() == "back")
             {
                 Console.Clear();
@@ -116,6 +119,7 @@ class Platform
             }
         } while (String.IsNullOrEmpty(firstname));
 
+        //Ask for lastname
         string? lastname;
         do
         {
@@ -129,6 +133,7 @@ class Platform
             }
         } while (String.IsNullOrEmpty(lastname));
 
+        //Ask for email
         string? email;
         while (true)
         {
@@ -137,26 +142,31 @@ class Platform
             if (email?.ToLower() == "back")
             {
                 Console.Clear();
-                return;
+                return; // Exit if user writes "back"
             }
 
             try
             {
+                //Create temporary member object to validate email
+                //Exit the loop is email is valid
                 var tempMember = new Member(firstname, lastname, email!, DateOnly.MinValue, "", "", null!);
                 break;
             }
             catch (ArgumentException e)
             {
+                //Display error message if email is invalid
                 System.Console.WriteLine(e.Message);
             }
         }
-
+        //Ask for birthday
         DateOnly birthday;
         while (true)
         {
+            //Ask for right format
             System.Console.Write("Birthday (yyyy-mm-dd): ");
             string? input = Console.ReadLine();
 
+            //If user input is "back" - return
             if (input?.ToLower() == "back")
             {
                 Console.Clear();
@@ -165,20 +175,23 @@ class Platform
 
             try
             {
+                //Create temporary member to validate birtday
                 var tempMember = new Member("temp", "temp", "temp@example.com", DateOnly.ParseExact(input!, "yyyy-MM-dd"), "temp", "temp", null!);
                 birthday = tempMember.Birthday;
                 break;
             }
             catch (FormatException)
             {
+                //Handle invalid date format
                 System.Console.WriteLine("Invalid date format. Please use YYYY-MM-DD.");
             }
             catch (ArgumentException ex)
             {
+                //Handle other argument exceptions
                 System.Console.WriteLine(ex.Message);
             }
         }
-
+        //Ask for username
         string? username;
         do
         {
@@ -191,19 +204,22 @@ class Platform
             }
         } while (String.IsNullOrEmpty(username));
 
+        //Create password variables
         string? firstPassword;
         string? secondPassword;
 
+        //Ask for password
         while (true)
         {
             System.Console.Write("Password: ");
+            //Call ReadPassword method from Services class
             firstPassword = services.ReadPassword();
             if (firstPassword?.ToLower() == "back")
             {
                 Console.Clear();
                 return;
             }
-
+            //Double check password to make sure user input is right
             System.Console.Write("Enter password again: ");
             secondPassword = services.ReadPassword();
             if (secondPassword?.ToLower() == "back")
@@ -211,7 +227,8 @@ class Platform
                 Console.Clear();
                 return;
             }
-
+            //If passwords match - break out of loop
+            //Else display error
             if (firstPassword == secondPassword)
             {
                 break;
@@ -222,30 +239,36 @@ class Platform
             }
         }
 
+        //Create new account 
         Account newAccount = new Account(new List<Post>(), new List<Member>());
 
+        //Create new member using inputs and new account
+        //Add to members list
         Member newMember = new Member(firstname, lastname, email!, birthday, username, firstPassword!, newAccount);
         members.Add(newMember);
 
         System.Console.WriteLine();
         System.Console.WriteLine("Registration successful!");
-        
+
         services.SaveMembers(members);
 
         new Services().PressKeyAndContinue();
     }
+    //Method for viewing all members on platform
     public void ViewAllMembers()
     {
         Console.Clear();
         System.Console.WriteLine("=== All members ===");
         System.Console.WriteLine();
 
+        //Check if members list is empty
         if (members.Count < 1)
         {
             System.Console.WriteLine("List of members is empty...");
         }
         else
         {
+            //If list != empty - display given information
             foreach (var m in members)
             {
                 System.Console.WriteLine("---");
@@ -258,6 +281,7 @@ class Platform
         }
         new Services().PressKeyAndContinue();
     }
+    //Method for displaying information about the program
     public void AboutUs()
     {
         Console.Clear();
@@ -273,18 +297,21 @@ class Platform
 
         new Services().PressKeyAndContinue();
     }
+    //Method for getting all members 
     public List<Member> GetAllMembers()
     {
         if (members == null)
         {
-            members = services.LoadMembers(); // Ladda medlemmar om de inte är laddade
+            members = services.LoadMembers(); // Load members if not loaded
         }
         return members;
     }
+    //Call method for Services
     public void LoadMembers()
     {
         members = services.LoadMembers();
     }
+    //Call method from Services
     public void SaveMembers()
     {
         services.SaveMembers(members);
