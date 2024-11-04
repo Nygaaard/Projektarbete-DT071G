@@ -85,7 +85,11 @@ class MyPage
         //Validate message
         if (String.IsNullOrEmpty(message))
         {
-            System.Console.WriteLine("Write something...");
+            System.Console.WriteLine();
+            System.Console.WriteLine("You must write something...");
+            System.Console.WriteLine();
+            System.Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
             return;
         }
         else
@@ -120,17 +124,20 @@ class MyPage
         //Add index in front of message
         foreach (var post in posts)
         {
+            System.Console.WriteLine();
             System.Console.WriteLine($"[{i}] - {post.Message}");
             i++;
         }
 
+        System.Console.WriteLine();
+        System.Console.Write("Index: ");
         string? userInput = Console.ReadLine();
 
         //Validate user input 
         //Make sure input is a valid number
         if (!String.IsNullOrEmpty(userInput) && int.TryParse(userInput, out int indexNumber))
         {
-            if (indexNumber >= 0 || indexNumber < posts.Count)
+            if (indexNumber >= 0 && indexNumber < posts.Count)
             {
                 //If valid - remove post on given index
                 System.Console.WriteLine("Post deleted...");
@@ -142,7 +149,7 @@ class MyPage
             System.Console.WriteLine("Index not found...");
             return;
         }
-
+        
         new Services().PressKeyAndContinue();
     }
     //Method for reading posts

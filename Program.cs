@@ -47,10 +47,11 @@ class Program
                     platform.AboutUs();
                     break;
                 case "0":
-                //Break loop if input = 0
+                    //Break loop if input = 0
                     isRunning = false;
                     Console.Clear();
                     System.Console.WriteLine("Exit program...");
+                    platform.SaveMembers();
                     break;
                 default:
                     //Error message if input is invalid

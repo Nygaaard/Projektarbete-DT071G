@@ -250,7 +250,7 @@ class Platform
         System.Console.WriteLine();
         System.Console.WriteLine("Registration successful!");
 
-        services.SaveMembers(members);
+        // services.SaveMembers(members);
 
         new Services().PressKeyAndContinue();
     }
