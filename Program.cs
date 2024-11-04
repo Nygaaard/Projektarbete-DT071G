@@ -1,5 +1,5 @@
 ﻿/*
-Program class with Main method 
+Program class
 Written by Andreas Nygård
 */
 class Program

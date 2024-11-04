@@ -18,22 +18,29 @@ class Services
     //Method to save a list of members to a JSON file
     public void SaveMembers(List<Member> members)
     {
+        //Definiera sökväg
         string filePath = "members.json";
+        //Serialisera listan med medlemmar till JSON-format
         string jsonData = JsonSerializer.Serialize(members, new JsonSerializerOptions
         {
             WriteIndented = true,
-            IncludeFields = true // Viktigt för att inkludera alla fält, inklusive nested objects
+            IncludeFields = true 
         });
+        //Json-format till filen
         File.WriteAllText(filePath, jsonData);
     }
 
     public List<Member> LoadMembers()
     {
+        //Sökväg
         string filePath = "members.json";
         List<Member> members = new List<Member>();
+        //Kontrollera att filen finns
         if (File.Exists(filePath))
         {
+            //Läs i så fall in JSON-data från filen
             string jsonData = File.ReadAllText(filePath);
+            //Deserialisera JSON-data
             members = JsonSerializer.Deserialize<List<Member>>(jsonData, new JsonSerializerOptions
             {
                 IncludeFields = true

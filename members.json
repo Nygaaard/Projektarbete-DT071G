@@ -1,42 +1,88 @@
 [
   {
-    "Firstname": "Carolina ",
+    "Firstname": "Carolina",
     "Lastname": "Andersson",
     "Email": "caan@su.se",
     "Birthday": "1992-06-16",
     "Username": "Busan",
     "Password": "pass",
     "Account": {
-      "Posts": [
-        {
-          "Message": "Test"
-        }
-      ],
+      "Posts": [],
       "Friends": []
     }
   },
   {
-    "Firstname": "Andreas",
-    "Lastname": "Nygard",
-    "Email": "anny2301@student.miun.se",
-    "Birthday": "1992-04-15",
-    "Username": "Anny",
+    "Firstname": "Christian",
+    "Lastname": "Pettersson",
+    "Email": "chpe@student.se",
+    "Birthday": "1990-12-27",
+    "Username": "Chris",
     "Password": "pass",
     "Account": {
-      "Posts": [],
-      "Friends": []
+      "Posts": [
+        {
+          "Message": "Test"
+        },
+        {
+          "Message": "Hejsan"
+        }
+      ],
+      "Friends": [
+        {
+          "Firstname": "Carolina",
+          "Lastname": "Andersson",
+          "Email": "caan@su.se",
+          "Birthday": "1992-06-16",
+          "Username": "Busan",
+          "Password": "pass",
+          "Account": {
+            "Posts": [],
+            "Friends": []
+          }
+        }
+      ]
     }
   },
   {
     "Firstname": "Calle",
-    "Lastname": "Karlsson",
-    "Email": "calle@format.se",
-    "Birthday": "1994-05-14",
-    "Username": "Callis",
+    "Lastname": "Sp\u0000ngsson",
+    "Email": "sp\u0000ngen@gmail.com",
+    "Birthday": "1997-04-06",
+    "Username": "Spangen",
     "Password": "pass",
     "Account": {
-      "Posts": [],
-      "Friends": []
+      "Posts": [
+        {
+          "Message": "Hej"
+        },
+        {
+          "Message": "Tjena"
+        },
+        {
+          "Message": "Test100"
+        }
+      ],
+      "Friends": [
+        {
+          "Firstname": "Christian",
+          "Lastname": "Pettersson",
+          "Email": "chpe@student.se",
+          "Birthday": "1990-12-27",
+          "Username": "Chris",
+          "Password": "pass",
+          "Account": {
+            "Posts": [
+              {
+                "Message": "Test"
+              },
+              {
+                "Message": "Hejsan"
+              }
+            ],
+            "Friends": []
+          }
+        }
+      ]
     }
   }
 ]
