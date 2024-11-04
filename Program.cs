@@ -1,4 +1,5 @@
 ﻿/*
+Projektarbete i kurs DT071G
 Program class
 Written by Andreas Nygård
 */
